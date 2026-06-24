@@ -1,0 +1,12 @@
+# Core runtime — required for all csibench functionality
+torch>=2.0.0
+numpy>=1.24.0
+
+# Optional: YAML config files (EvalConfig.from_yaml / to_yaml)
+pyyaml>=6.0
+
+# Optional: interactive HTML reports (report.save("html"))
+plotly>=5.0.0
+
+# Optional: DataFrame export (report.to_pandas())
+pandas>=2.0.0
