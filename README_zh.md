@@ -23,7 +23,7 @@
 
 ```
 Test Project/              
-├── csibench/                       
+├── csieval/                       
 ├── data/              
 └── runs/                  
     └── best.pt
@@ -34,7 +34,7 @@ Test Project/
 ```
 ### 如何使用
 ```python
-from csibench import Evaluator, EvalConfig
+from csieval import Evaluator, EvalConfig
 
 report = Evaluator(
         task="eigenvector_feedback",
@@ -77,7 +77,7 @@ pandas>=2.0.0
 
 ```python
 import torch
-from csibench import Evaluator, EvalConfig
+from csieval import Evaluator, EvalConfig
 from mymodel import MyCsiNet
 
 my_model = MyCsiNet(nt=32, n_subbands=13)
@@ -109,7 +109,7 @@ report = Evaluator(
 ### 方式 C — 传入模型类 + 构造函数参数
 
 ```python
-from csibench import Evaluator, EvalConfig
+from csieval import Evaluator, EvalConfig
 
 cfg = EvalConfig(
     task="eigenvector_feedback",
@@ -135,7 +135,7 @@ report = Evaluator(cfg).run()
 
 🔗 [https://huggingface.co/datasets/YSSAie/csi-eval-compression](https://huggingface.co/datasets/YSSAie/csi-eval-compression)
 
-压缩包内已包含下面介绍的三份子集（`2_6GHz`、`2_6GHz_part1_new`、`2_6GHz_part2`），目录结构与 `csibench` 期望的一致，下载后即可直接使用。
+压缩包内已包含下面介绍的三份子集（`2_6GHz`、`2_6GHz_part1_new`、`2_6GHz_part2`），目录结构与 `csieval` 期望的一致，下载后即可直接使用。
 
 如果希望自行从原始数据处理，可使用 [`data_generation_scripts/`](./data_generation_scripts) 目录下的数据处理脚本（`scripts/generate_waird_csi_feedback_data.py`、`scripts/generate_part1_subset.py`、`scripts/generate_part2.py`）在 Raw 数据上处理。原始数据来源：
 
@@ -335,10 +335,10 @@ class MyCsiNet(nn.Module):
 
 ## 提交前自检清单
 
-当你要把一个**外部模型**（非本仓库训练、未在当前数据集训练过的 checkpoint）接入 `csibench` 评估时，请先确认满足以下条件。任一项不满足，评估结果都不可信。
+当你要把一个**外部模型**（非本仓库训练、未在当前数据集训练过的 checkpoint）接入 `csieval` 评估时，请先确认满足以下条件。任一项不满足，评估结果都不可信。
 
 ### 1. 数据集形状对齐
-- 确认训练时使用的 `n_subcarriers`、`n_t`、复数表达方式（实/虚分两通道 vs 复数末维）与本仓库配置一致（见 `csibench/core/config.py`）。
+- 确认训练时使用的 `n_subcarriers`、`n_t`、复数表达方式（实/虚分两通道 vs 复数末维）与本仓库配置一致（见 `csieval/core/config.py`）。
 - 在小批量上 `forward()` 一次，打印输入张量形状用于对比。
 
 ### 2. checkpoint 兼容

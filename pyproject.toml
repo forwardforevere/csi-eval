@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "csieval"
+version = "0.1.0"
+description = "Self-contained evaluation framework for CSI feedback compression models"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "CSI Feedback Team"},
+]
+keywords = [
+    "csi", "feedback", "compression", "5g", "6g", "neural-network",
+    "evaluation", "benchmark", "wireless", "massive-mimo",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.24.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "build>=1.0",
+    "twine>=4.0",
+]
+vis = [
+    "plotly>=5.0.0",
+]
+pandas = [
+    "pandas>=2.0.0",
+]
+all = [
+    "csieval[dev,vis,pandas]",
+]
+
+[project.scripts]
+csieval = "csieval.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/forwardforevere/csi-eval"
+Documentation = "https://github.com/forwardforevere/csi-eval"
+Repository = "https://github.com/forwardforevere/csi-eval"
+Issues = "https://github.com/forwardforevere/csi-eval/issues"
+
+# Package layout (everything now lives under the csieval/ subdirectory):
+#   csieval/                    <- the "csieval" package
+#     __init__.py               <- public API re-exports
+#     cli.py                    <- `csieval` console-script entry point
+#     version.py                <- __version__
+#     core/ loaders/ metrics/ models/ presets/ reports/ runners/ static/ tasks/
+#   data_generation_scripts/    <- dev-only, NOT shipped in wheel
+#   tests/                      <- dev-only, NOT shipped in wheel
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["csieval*"]
+exclude = ["tests*", "data_generation_scripts*", "build*", "dist*",
+           "*.egg-info"]
+
+[tool.setuptools.package-data]
+"csieval.presets"  = ["*.yaml", "*.yml"]
+"csieval.reports"  = ["*.html"]
+"csieval.static"   = ["*.png", "*.css", "*.js"]
+"csieval.tasks"    = ["*.yaml", "*.yml"]
+"*"                = ["py.typed"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.pyc", "__pycache__", "*.egg-info", "build/*", "dist/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true

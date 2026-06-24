@@ -1,0 +1,82 @@
+# ─── Python ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+pip-log.txt
+*.pyo
+
+# ─── Virtual environments ────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ─── Test / coverage ─────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# ─── Jupyter ─────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ─── Data & model artifacts (NEVER commit) ───────────────
+data/
+datasets/
+runs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.h5
+*.hdf5
+*.npy
+*.npz
+
+# The data-prep helpers under data_generation_scripts/data/Dataset/ are
+# Python source (not data files). Re-include them.
+!data_generation_scripts/data/
+!data_generation_scripts/data/Dataset/
+!data_generation_scripts/data/Dataset/*.py
+
+# ─── Eval outputs / reports ──────────────────────────────
+results/
+reports_output/
+*.html
+!csieval/reports/templates/*.html
+
+# ─── Logs ────────────────────────────────────────────────
+logs/
+*.log
+wandb/
+mlruns/
+
+# ─── IDE / editor ────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Secrets / local config ──────────────────────────────
+.env
+.env.*
+secrets.yaml
+*.local.yaml

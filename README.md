@@ -28,7 +28,7 @@
 
 ```
 Test Project/              
-├── csibench/                       
+├── csieval/                       
 ├── data/              
 └── runs/                  
     └── best.pt
@@ -40,7 +40,7 @@ Test Project/
 
 ### How to Use
 ```python
-from csibench import Evaluator, EvalConfig
+from csieval import Evaluator, EvalConfig
 
 report = Evaluator(
         task="eigenvector_feedback",
@@ -84,7 +84,7 @@ pandas>=2.0.0
 
 ```python
 import torch
-from csibench import Evaluator, EvalConfig
+from csieval import Evaluator, EvalConfig
 from mymodel import MyCsiNet
 
 my_model = MyCsiNet(nt=32, n_subbands=13)
@@ -117,7 +117,7 @@ The framework builds a placeholder model (parameter shapes matching EVCsiNet Nt=
 ### Method C — Model class + constructor arguments
 
 ```python
-from csibench import Evaluator, EvalConfig
+from csieval import Evaluator, EvalConfig
 
 cfg = EvalConfig(
     task="eigenvector_feedback",
@@ -143,7 +143,7 @@ You can download the preprocessed evaluation datasets from Hugging Face:
 
 🔗 [https://huggingface.co/datasets/YSSAie/csi-eval-compression](https://huggingface.co/datasets/YSSAie/csi-eval-compression)
 
-The archive contains the three ready-to-use subsets (`2_6GHz`, `2_6GHz_part1_new`, `2_6GHz_part2`) described below, already in the directory layout expected by `csibench`.
+The archive contains the three ready-to-use subsets (`2_6GHz`, `2_6GHz_part1_new`, `2_6GHz_part2`) described below, already in the directory layout expected by `csieval`.
 
 If you want to process the data yourself from raw recordings, use the data preparation scripts under [`data_generation_scripts/`](./data_generation_scripts) (see `scripts/generate_waird_csi_feedback_data.py`, `scripts/generate_part1_subset.py`, `scripts/generate_part2.py`) on the raw CSI data. The raw data source is:
 
@@ -353,7 +353,7 @@ class MyCsiNet(nn.Module):
 When plugging in an **external model** (a checkpoint not trained by this repo, and/or not trained on the current dataset), confirm the following **before** running the evaluator. Any failure here makes the report numbers meaningless.
 
 ### 1. Dataset Shape Alignment
-- `n_subcarriers`, `n_t`, and the complex-tensor convention (real/imag split vs complex-last) used during training must match this repo's config (see `csibench/core/config.py`).
+- `n_subcarriers`, `n_t`, and the complex-tensor convention (real/imag split vs complex-last) used during training must match this repo's config (see `csieval/core/config.py`).
 - Run one `forward()` on a small batch and print the input shape to compare.
 
 ### 2. Checkpoint Compatibility

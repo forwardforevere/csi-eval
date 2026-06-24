@@ -1,4 +1,4 @@
-# Core runtime — required for all csibench functionality
+# Core runtime — required for all csieval functionality
 torch>=2.0.0
 numpy>=1.24.0
 
